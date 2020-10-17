@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require './phone_number'
+require './birthday'
 # Create contacts that can be searched
 class Contact
   attr_accessor :first_name, :middle_name, :last_name
@@ -7,7 +9,15 @@ class Contact
 
   def initialize
     @phone_numbers = []
+    @date = []
   end
+
+  def add_birthday(day)
+    birthday = Birthday.new
+    birthday.day = day
+    @date.push(birthday)
+  end
+
 
   def add_phone_number(kind, number)
     phone_number = PhoneNumber.new
@@ -16,34 +26,27 @@ class Contact
     phone_numbers.push(phone_number)
   end
 
+  def print_phone_numbers
+    puts "Phone Numbers"
+    phone_numbers.each { |phone_number| puts phone_number }
+  end
+
   def first_name
-    print 'Please enter this new contact\'s first name: '
-    @first_name = gets.chomp
+    @first_name
   end
 
   def middle_name
-    loop do
-      print 'Would you like to enter a middle name? (y/n): '
-      answer = gets.chomp
-      if answer == 'y'
-        print 'Please enter this new contact\'s middle name: '
-        @middle_name = gets.chomp
-        break
-      elsif answer == 'n'
-        break
-      end
-    end
+    @middle_name
   end
 
   def last_name
-    print 'Please enter this new contact\'s last name: '
-    @last_name = gets.chomp
+    @last_name
   end
 
   def last_first
     last_first = last_name
-    last_first =+ ', '
-    last_first =+ first_name
+    last_first += ', '
+    last_first += first_name
     unless @middle_name.nil?
       last_name += first_name
       last_name += middle_name.slice(0, 1)
@@ -58,10 +61,9 @@ class Contact
 
   def full_name
     full_name = first_name
-    middle_name
     unless @middle_name.nil?
       full_name += ' '
-      full_name += @middle_name
+      full_name += middle_name
     end
     full_name += ' '
     full_name += last_name
@@ -84,22 +86,11 @@ class Contact
   end
 end
 
-contact1 = Contact.new
-puts contact1.full_name
-
-loop do
-  print 'Would you like to enter another contact? (y/n): '
-  answer = gets.chomp.to_s
-  p answer
-  if answer == 'y'
-    new_contact = Contact.new
-    puts new_contact.full_name
-    break
-  elsif answer == 'n'
-    break
-  end
-end
-puts contact1.full_name
-
-
-
+richard = Contact.new
+richard.first_name = 'Richard'
+richard.middle_name = 'Guy'
+richard.last_name = 'Tea'
+richard.add_phone_number('Home', '(123)456-7890')
+richard.add_phone_number('Cell', '(123)456-7890')
+richard.add_birthday('October 3')
+richard.print_phone_numbers
