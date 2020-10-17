@@ -1,7 +1,9 @@
 class Birthday
-  attr_accessor :day
+  attr_reader :birthday
 
   def to_s
-    day.to_s
+    birthday = ''
+    "Birthday: #{birthday}"
   end
+
 end

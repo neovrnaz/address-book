@@ -1,23 +1,20 @@
 # frozen_string_literal: true
 
+require './address'
 require './phone_number'
 require './birthday'
+
 # Create contacts that can be searched
 class Contact
   attr_accessor :first_name, :middle_name, :last_name
-  attr_reader :phone_numbers
+  attr_reader :phone_numbers, :birthday, :addresses
 
   def initialize
     @phone_numbers = []
+    @addresses = []
     @date = []
+    @birthday = []
   end
-
-  def add_birthday(day)
-    birthday = Birthday.new
-    birthday.day = day
-    @date.push(birthday)
-  end
-
 
   def add_phone_number(kind, number)
     phone_number = PhoneNumber.new
@@ -26,9 +23,20 @@ class Contact
     phone_numbers.push(phone_number)
   end
 
+  def add_birthday(day)
+    birthday = Birthday.new
+    birthday.day = day
+    birthday
+  end
+
   def print_phone_numbers
-    puts "Phone Numbers"
+    puts 'Phone Numbers'
     phone_numbers.each { |phone_number| puts phone_number }
+  end
+
+  def print_birthday
+    p birthday
+    print "Birthday: #{birthday}"
   end
 
   def first_name
@@ -48,8 +56,8 @@ class Contact
     last_first += ', '
     last_first += first_name
     unless @middle_name.nil?
-      last_name += first_name
-      last_name += middle_name.slice(0, 1)
+      last_first += ' '
+      last_first += middle_name.slice(0, 1)
       last_first += '.'
     end
     last_first
@@ -92,5 +100,19 @@ richard.middle_name = 'Guy'
 richard.last_name = 'Tea'
 richard.add_phone_number('Home', '(123)456-7890')
 richard.add_phone_number('Cell', '(123)456-7890')
-richard.add_birthday('October 3')
 richard.print_phone_numbers
+
+home = Address.new
+home.kind = 'Home'
+home.street_1 = '123 Main St.'
+home.city = 'Portland'
+home.state = 'OR'
+home.postal_code = '12345'
+
+
+
+p richard.print_birthday
+# puts home.to_s('short')
+puts home.to_s('long')
+
+p richard.to_s('last_first')
