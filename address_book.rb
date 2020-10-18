@@ -7,6 +7,19 @@ class AddressBook
     @contacts = []
   end
 
+  def print_results(search, results)
+    puts search
+    puts "-" * 30
+    puts results
+    puts "-" * 30 + "\n"
+    results.each do |contact|
+      puts contact.to_s('full_name')
+      contact.print_phone_numbers
+      contact.print_addresses
+      puts "\n"
+    end
+  end
+
   def print_contact_list
     puts '-' * 30
     puts "Contact List: \n"
@@ -24,18 +37,9 @@ class AddressBook
                   contact.middle_name.downcase.include?(search) ||
                   contact.last_name.downcase.include?(search)
 
-      results.push(contact)
+      results.push(contact) unless results.include?(contact)
     end
-    puts "Name search results that include \"#{search}\"."
-    puts "-" * 30
-    puts results
-    puts "-" * 30
-    results.each do |contact|
-      puts contact.to_s('full_name')
-      contact.print_phone_numbers
-      contact.print_addresses
-      puts "\n"
-    end
+    print_results("Name search results for \"#{search}\":", results)
   end
 
   def find_by_phone_number(number)
@@ -43,19 +47,25 @@ class AddressBook
     search = number.gsub('-', '')
     contacts.each do |contact|
       contact.phone_numbers.each do |phone_number|
-        results.push(contact) if phone_number.number.gsub('-', '').include?(search)
+        if phone_number.number.gsub('-', '').include?(search)
+          results.push(contact) unless results.include?(contact)
+        end
       end
     end
-    puts "Name search results that include \"#{search}\"."
-    puts "-" * 30
-    puts results
-    puts "-" * 30
-    results.each do |contact|
-      puts contact.to_s('full_name')
-      contact.print_phone_numbers
-      contact.print_addresses
-      puts "\n"
+    print_results("Name search results for \"#{search}\":", results)
+  end
+
+  def find_by_address(query)
+    results = []
+    search = query.downcase
+    contacts.each do |contact|
+      contact.addresses.each do |address|
+        if address.to_s('long').downcase.include?(search)
+          results.push(contact) unless results.include?(contact)
+        end
+      end
     end
+    print_results("Name search results for \"#{search}\":", results)
   end
 end
 
@@ -75,12 +85,9 @@ russel.middle_name = ''
 russel.last_name = 'Sprout'
 russel.add_phone_number('Cell', '202-555-0750')
 russel.add_birthday('March 21')
-russel.add_address('Work', '4908  Moonlight Drive.', '', 'Palermo', 'NJ', '08230')
+russel.add_address('Work', '4908 Moonlight Drive.', '', 'Palermo', 'NJ', '08230')
 
 address_book.contacts.push(richard)
 address_book.contacts.push(russel)
 
-# address_book.print_contact_list
-
-# address_book.find_by_name('richard')
-address_book.find_by_phone_number('1')
+address_book.find_by_address('4908')
