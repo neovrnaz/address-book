@@ -4,7 +4,7 @@ require './address'
 require './phone_number'
 require './birthday'
 
-# Create contacts that can be searched
+# Provides formatting for all contact details
 class Contact
   attr_accessor :first_name, :middle_name, :last_name
   attr_reader :phone_numbers, :birthdays, :addresses
