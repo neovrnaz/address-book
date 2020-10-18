@@ -68,26 +68,3 @@ class AddressBook
     print_results("Name search results for \"#{search}\":", results)
   end
 end
-
-address_book = AddressBook.new
-richard = Contact.new
-richard.first_name = 'Richard'
-richard.middle_name = 'Guy'
-richard.last_name = 'Tea'
-richard.add_phone_number('Home', '202-555-0180')
-richard.add_phone_number('Cell', '202-555-0193')
-richard.add_birthday('October 3')
-richard.add_address('Home', '123 Main St.', '', 'Portland', 'OR', '12345')
-
-russel = Contact.new
-russel.first_name = 'Russel'
-russel.middle_name = ''
-russel.last_name = 'Sprout'
-russel.add_phone_number('Cell', '202-555-0750')
-russel.add_birthday('March 21')
-russel.add_address('Work', '4908 Moonlight Drive.', '', 'Palermo', 'NJ', '08230')
-
-address_book.contacts.push(richard)
-address_book.contacts.push(russel)
-
-address_book.find_by_address('4908')
