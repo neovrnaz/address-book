@@ -85,7 +85,7 @@ class Contact
 
   def full_name
     full_name = first_name
-    unless @middle_name.nil?
+    unless middle_name == ''
       full_name += ' '
       full_name += middle_name
     end
@@ -108,8 +108,4 @@ class Contact
       last_first
     end
   end
-end
-
-def horizontal_rule
-  puts '-' * 30
 end

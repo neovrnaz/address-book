@@ -52,8 +52,8 @@ class AddressBook
         puts 'p: add a phone number'
         puts 'a: add an address'
       end
-      if address_exists && address_exists
-        puts "Your contact was successfully added!\n"
+      if address_exists && number_exists
+        puts "Your contact was successfully added!\n\n"
         break
       elsif number_exists
         puts 'Add an address?'
@@ -91,7 +91,7 @@ class AddressBook
         contact.addresses.push(address)
         address_exists = true
       when 's'
-        print "\n"
+        puts "Your contact was successfully added!\n\n"
         break
       else
         puts "Option not found: #{response}"
@@ -120,7 +120,7 @@ class AddressBook
 
       results.push(contact) unless results.include?(contact)
     end
-    print_results("Name search results for \"#{search.capitalize}\":", results)
+    print_results("\nName search results for \"#{search.capitalize}\"", results)
   end
 
   def find_by_phone_number(number)
@@ -133,7 +133,6 @@ class AddressBook
         end
       end
     end
-    print_results("Phone search results for \"#{search}\":", results)
   end
 
   def find_by_address(query)
@@ -146,15 +145,18 @@ class AddressBook
         end
       end
     end
-    print_results("Address search results for \"#{search}\":", results)
   end
 
   def print_results(search, results)
     puts search
+    if results.count == 1
+      puts 'One result was found'
+    else
+      puts "#{results.count} results"
+    end
     puts '-' * 30
     puts results
     puts '-' * 30 + "\n"
-    puts "#{results.count} results"
     results.each do |contact|
       puts contact.to_s('full_name')
       contact.print_phone_numbers
