@@ -47,7 +47,7 @@ class Contact
 
   def print_addresses
     puts 'Addresses:'
-    addresses.each { |address| puts address.to_s('short') }
+    addresses.each { |address| print address.to_s('long') }
   end
 
   def print_birthday
@@ -113,19 +113,3 @@ end
 def horizontal_rule
   puts '-' * 30
 end
-
-richard = Contact.new
-richard.first_name = 'Richard'
-richard.middle_name = 'Guy'
-richard.last_name = 'Tea'
-puts richard.to_s('full_name')
-horizontal_rule
-richard.add_phone_number('Home', '(123)456-7890')
-richard.add_phone_number('Cell', '(123)456-7890')
-richard.print_phone_numbers
-
-richard.add_birthday('October 3')
-richard.print_birthday
-richard.add_address('Home', '123 Main St.', '', 'Portland', 'OR', '12345')
-
-richard.print_addresses

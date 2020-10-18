@@ -5,10 +5,10 @@ class Address
     address = ''
     case format
     when 'long'
-      address += "#{kind}: "
+      address += "#{kind}: \n"
       address += street_1 + "\n"
-      address += street + "\n" unless street_2.nil?
-      address += "#{city}, #{state}, #{postal_code}"
+      address += street_2 unless street_2.nil?
+      address += "#{city}, #{state}, #{postal_code}\n"
     when 'short'
       address += "#{kind}: "
       address += street_1
