@@ -5,3 +5,4 @@ class PhoneNumber
     "#{kind}: #{number}"
   end
 end
+

@@ -7,13 +7,13 @@ require './birthday'
 # Create contacts that can be searched
 class Contact
   attr_accessor :first_name, :middle_name, :last_name
-  attr_reader :phone_numbers, :birthday, :addresses
+  attr_reader :phone_numbers, :birthdays, :addresses
 
   def initialize
     @phone_numbers = []
     @addresses = []
     @date = []
-    @birthday = []
+    @birthdays = []
   end
 
   def add_phone_number(kind, number)
@@ -26,17 +26,33 @@ class Contact
   def add_birthday(day)
     birthday = Birthday.new
     birthday.day = day
-    birthday
+    birthdays.push(birthday)
+  end
+
+  def add_address(kind, street_1, street_2, city, state, postal_code)
+    address = Address.new
+    address.kind = kind
+    address.street_1 = street_1
+    address.street_2 = street_2
+    address.city = city
+    address.state = state
+    address.postal_code = postal_code
+    addresses.push(address)
   end
 
   def print_phone_numbers
-    puts 'Phone Numbers'
+    puts 'Phone Numbers:'
     phone_numbers.each { |phone_number| puts phone_number }
   end
 
+  def print_addresses
+    puts 'Addresses:'
+    addresses.each { |address| puts address.to_s('short') }
+  end
+
   def print_birthday
-    p birthday
-    print "Birthday: #{birthday}"
+    print 'Birthday: '
+    birthdays.each { |birthday| puts birthday }
   end
 
   def first_name
@@ -94,25 +110,22 @@ class Contact
   end
 end
 
+def horizontal_rule
+  puts '-' * 30
+end
+
 richard = Contact.new
 richard.first_name = 'Richard'
 richard.middle_name = 'Guy'
 richard.last_name = 'Tea'
+puts richard.to_s('full_name')
+horizontal_rule
 richard.add_phone_number('Home', '(123)456-7890')
 richard.add_phone_number('Cell', '(123)456-7890')
 richard.print_phone_numbers
 
-home = Address.new
-home.kind = 'Home'
-home.street_1 = '123 Main St.'
-home.city = 'Portland'
-home.state = 'OR'
-home.postal_code = '12345'
+richard.add_birthday('October 3')
+richard.print_birthday
+richard.add_address('Home', '123 Main St.', '', 'Portland', 'OR', '12345')
 
-
-
-p richard.print_birthday
-# puts home.to_s('short')
-puts home.to_s('long')
-
-p richard.to_s('last_first')
+richard.print_addresses
