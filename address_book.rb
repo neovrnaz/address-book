@@ -1,7 +1,7 @@
-# frozen_string_literal: true
 
 require './contact'
 require 'yaml'
+# frozen_string_literal: true
 
 # Class to initialize and store all contacts
 class AddressBook
@@ -23,12 +23,14 @@ class AddressBook
     end
   end
 
+
   def run
     loop do
-      puts 'Address Book'
+      puts "\nAddress Book"
       puts 'p: print address book'
       puts 'a: add contact'
       puts 's: search for contact(s)'
+      puts 'd: delete a contact'
       puts 'e: exit'
       print 'Enter your choice: '
       input = gets.chomp.downcase
@@ -37,6 +39,8 @@ class AddressBook
         print_contact_list
       when 'a'
         add_contact
+      when 'd'
+        delete_contact
       when 's'
         print 'Enter a search term: '
         search = gets.chomp
@@ -117,6 +121,27 @@ class AddressBook
     contacts.push(contact)
   end
 
+  def delete_contact
+    results = []
+    print 'Enter the full name of the contact you would like to delete: '
+    search = gets.chomp.downcase
+    find_by_name(search)
+    puts 'Are you sure that you would like to delete this contact?'
+    puts 'y: yes'
+    puts 'n: no'
+    print 'Enter y or n: '
+    answer = gets.chomp.downcase
+    case answer
+    when 'y'
+      contacts.each do |contact|
+        contacts.delete(contact)
+        puts "\nWe have deleted the contact #{search}!"
+      end
+    else
+      puts "We have canceled your request to delete #{search}"
+    end
+  end
+
   def print_contact_list
     puts '-' * 30
     puts "Contact List: \n"
@@ -181,7 +206,6 @@ class AddressBook
     end
   end
 end
-
 
 address_book = AddressBook.new
 address_book.run
