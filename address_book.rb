@@ -14,13 +14,13 @@ class AddressBook
       puts 'p: print address book'
       puts 'a: add contact'
       puts 'e: exit'
-      print 'enter your choice: '
+      print 'Enter your choice: '
       input = gets.chomp.downcase
       case input
       when 'p'
         print_contact_list
       when 'a'
-
+        add_contact
       when 'e'
         break
       end
@@ -29,11 +29,11 @@ class AddressBook
 
   def add_contact
     contact = Contact.new
-    print 'first name: '
+    print 'First name: '
     contact.first_name = gets.chomp
-    print 'middle name: '
+    print 'Middle name: '
     contact.middle_name = gets.chomp
-    print 'last name: '
+    print 'Last name: '
     contact.last_name = gets.chomp
     contacts.push(contact)
   end
