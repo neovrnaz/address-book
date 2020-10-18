@@ -35,6 +35,62 @@ class AddressBook
     contact.middle_name = gets.chomp
     print 'Last name: '
     contact.last_name = gets.chomp
+
+    done = false
+    number_exists = false
+    address_exists = false
+    until done
+      unless address_exists || number_exists
+        puts 'Add a phone number or address?'
+        puts 'p: add a phone number'
+        puts 'a: add an address'
+      end
+      if address_exists && address_exists
+        puts "Contact creation was successful!\n"
+        break
+      elsif number_exists
+        puts 'Add an address?'
+        puts 'a: add an address'
+      elsif address_exists
+        puts 'Add a phone number?'
+        puts 'p: add a phone number'
+      end
+      puts 's: skip'
+      print 'Enter your choice: '
+      response = gets.chomp.downcase
+      case response
+      when 'p'
+        phone = PhoneNumber.new
+        print 'What kind of phone number is this? (Work, Cell, Home, etc): '
+        phone.kind = gets.chomp
+        print 'Phone number: '
+        phone.number = gets.chomp
+        contact.phone_numbers.push(phone)
+        number_exists = true
+      when 'a'
+        address = Address.new
+        print 'Is this a home address or something else? (Home, Work, etc): '
+        address.kind = gets.chomp
+        print 'Address line 1: '
+        address.street_1 = gets.chomp
+        print 'Address line 2: '
+        address.street_2 = gets.chomp
+        print 'City: '
+        address.city = gets.chomp
+        print 'State: '
+        address.state = gets.chomp
+        print 'Postal Code: '
+        address.postal_code = gets.chomp
+        contact.addresses.push(address)
+        address_exists = true
+      when 's'
+        print "\n"
+        break
+      else
+        puts "Option not found: #{response}"
+        done = false
+      end
+    end
     contacts.push(contact)
   end
 
