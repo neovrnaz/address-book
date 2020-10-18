@@ -13,6 +13,7 @@ class AddressBook
       puts 'Address Book'
       puts 'p: print address book'
       puts 'a: add contact'
+      puts 's: search for contact(s)'
       puts 'e: exit'
       print 'Enter your choice: '
       input = gets.chomp.downcase
@@ -21,6 +22,12 @@ class AddressBook
         print_contact_list
       when 'a'
         add_contact
+      when 's'
+        print 'Enter a search term: '
+        search = gets.chomp
+        find_by_name(search)
+        find_by_phone_number(search)
+        find_by_address(search)
       when 'e'
         break
       end
@@ -46,7 +53,7 @@ class AddressBook
         puts 'a: add an address'
       end
       if address_exists && address_exists
-        puts "Contact creation was successful!\n"
+        puts "Your contact was successfully added!\n"
         break
       elsif number_exists
         puts 'Add an address?'
@@ -69,7 +76,7 @@ class AddressBook
         number_exists = true
       when 'a'
         address = Address.new
-        print 'Is this a home address or something else? (Home, Work, etc): '
+        print 'Is this a home address or something else? (Work, Home, etc): '
         address.kind = gets.chomp
         print 'Address line 1: '
         address.street_1 = gets.chomp
@@ -94,19 +101,6 @@ class AddressBook
     contacts.push(contact)
   end
 
-  def print_results(search, results)
-    puts search
-    puts '-' * 30
-    puts results
-    puts '-' * 30 + "\n"
-    results.each do |contact|
-      puts contact.to_s('full_name')
-      contact.print_phone_numbers
-      contact.print_addresses
-      puts "\n"
-    end
-  end
-
   def print_contact_list
     puts '-' * 30
     puts "Contact List: \n"
@@ -115,6 +109,7 @@ class AddressBook
       puts contact.to_s('last_first')
     end
   end
+
 
   def find_by_name(name)
     results = []
@@ -153,6 +148,19 @@ class AddressBook
       end
     end
     print_results("Name search results for \"#{search}\":", results)
+  end
+
+  def print_results(search, results)
+    puts search
+    puts '-' * 30
+    puts results
+    puts '-' * 30 + "\n"
+    results.each do |contact|
+      puts contact.to_s('full_name')
+      contact.print_phone_numbers
+      contact.print_addresses
+      puts "\n"
+    end
   end
 end
 
