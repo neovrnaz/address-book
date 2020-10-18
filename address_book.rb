@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './contact'
 
 # Class to initialize and store all contacts
@@ -6,6 +7,27 @@ class AddressBook
   def initialize
     @contacts = []
   end
+
+  def run
+    loop do
+      puts 'Address Book'
+      puts 'p: print address book'
+      puts 'a: add contact'
+      puts 'e: exit'
+      print 'enter your choice: '
+      input = gets.chomp.downcase
+      case input
+      when 'p'
+        print_contact_list
+      when 'a'
+
+      when 'e'
+        break
+      end
+    end
+  end
+
+
 
   def print_results(search, results)
     puts search
@@ -68,3 +90,7 @@ class AddressBook
     print_results("Name search results for \"#{search}\":", results)
   end
 end
+
+
+address_book = AddressBook.new
+address_book.run
