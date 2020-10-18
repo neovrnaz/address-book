@@ -1,0 +1,7 @@
+---
+- !ruby/object:Contact
+  phone_numbers: []
+  addresses: []
+  first_name: Richard
+  middle_name: ''
+  last_name: Tea
