@@ -36,7 +36,7 @@ class AddressBook
 
   def add_contact
     contact = Contact.new
-    print 'First name: '
+    print "\nFirst name: "
     contact.first_name = gets.chomp
     print 'Middle name: '
     contact.middle_name = gets.chomp
@@ -48,7 +48,7 @@ class AddressBook
     address_exists = false
     until done
       unless address_exists || number_exists
-        puts 'Add a phone number or address?'
+        puts "\nAdd a phone number or address?"
         puts 'p: add a phone number'
         puts 'a: add an address'
       end
@@ -110,7 +110,6 @@ class AddressBook
     end
   end
 
-
   def find_by_name(name)
     results = []
     search = name.downcase
@@ -121,7 +120,7 @@ class AddressBook
 
       results.push(contact) unless results.include?(contact)
     end
-    print_results("Name search results for \"#{search}\":", results)
+    print_results("Name search results for \"#{search.capitalize}\":", results)
   end
 
   def find_by_phone_number(number)
@@ -134,7 +133,7 @@ class AddressBook
         end
       end
     end
-    print_results("Name search results for \"#{search}\":", results)
+    print_results("Phone search results for \"#{search}\":", results)
   end
 
   def find_by_address(query)
@@ -147,7 +146,7 @@ class AddressBook
         end
       end
     end
-    print_results("Name search results for \"#{search}\":", results)
+    print_results("Address search results for \"#{search}\":", results)
   end
 
   def print_results(search, results)
@@ -155,6 +154,7 @@ class AddressBook
     puts '-' * 30
     puts results
     puts '-' * 30 + "\n"
+    puts "#{results.count} results"
     results.each do |contact|
       puts contact.to_s('full_name')
       contact.print_phone_numbers
