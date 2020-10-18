@@ -27,13 +27,22 @@ class AddressBook
     end
   end
 
-
+  def add_contact
+    contact = Contact.new
+    print 'first name: '
+    contact.first_name = gets.chomp
+    print 'middle name: '
+    contact.middle_name = gets.chomp
+    print 'last name: '
+    contact.last_name = gets.chomp
+    contacts.push(contact)
+  end
 
   def print_results(search, results)
     puts search
-    puts "-" * 30
+    puts '-' * 30
     puts results
-    puts "-" * 30 + "\n"
+    puts '-' * 30 + "\n"
     results.each do |contact|
       puts contact.to_s('full_name')
       contact.print_phone_numbers
