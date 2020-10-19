@@ -9,7 +9,7 @@ Carry an entire list of addresses and phone numbers in your terminal
 
 
 <p align="center">
-  <img src="https://media.giphy.com/media/a1aFdVYMw1VPYYGAbN/giphy.gif" alt="Sublime's custom image"/>
+  <img src="https://media.giphy.com/media/a1aFdVYMw1VPYYGAbN/giphy.gif" width="650" alt="Sublime's custom image"/>
 </p>
 
 ## Usage
