@@ -1,7 +1,19 @@
 ---
 - !ruby/object:Contact
-  phone_numbers: []
-  addresses: []
-  first_name: Richard
-  middle_name: ''
-  last_name: Tea
+  phone_numbers:
+  - !ruby/object:PhoneNumber
+    kind: Work
+    number: '1234567890'
+  addresses:
+  - !ruby/object:Address
+    kind: Work
+    street_1: 123 Main St.
+    street_2: ''
+    city: Denver
+    state: CO
+    postal_code: '12345'
+  first_name: Allen
+  middle_name: G
+  last_name: Fresco
+  date: []
+  birthdays: []

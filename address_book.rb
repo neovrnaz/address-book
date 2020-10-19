@@ -40,7 +40,9 @@ class AddressBook
       when 'a'
         add_contact
       when 'd'
-        delete_contact
+        print 'Enter the name of the contact that you\'d like to delete: '
+        input = gets.chomp
+        delete_contact(input)
       when 's'
         print 'Enter a search term: '
         search = gets.chomp
@@ -121,24 +123,30 @@ class AddressBook
     contacts.push(contact)
   end
 
-  def delete_contact
-    results = []
-    print 'Enter the full name of the contact you would like to delete: '
-    search = gets.chomp.downcase
-    find_by_name(search)
-    puts 'Are you sure that you would like to delete this contact?'
-    puts 'y: yes'
-    puts 'n: no'
-    print 'Enter y or n: '
-    answer = gets.chomp.downcase
-    case answer
-    when 'y'
-      contacts.each do |contact|
+  def delete_contact(name)
+    delete = name.downcase
+    contacts.each do |contact|
+      next unless contact.full_name.downcase.include?(delete)
+      puts "Delete #{contact.full_name}?"
+      puts 'y: yes'
+      puts 'n: no'
+      print 'Enter your choice: '
+      input = gets.chomp
+      case input
+      when 'y'
+        puts "Deleting #{contact.full_name}"
         contacts.delete(contact)
-        puts "\nWe have deleted the contact #{search}!"
+        sleep(0.5)
+        print '.'
+        sleep(0.5)
+        print '.'
+        sleep(0.5)
+        print '.'
+        sleep(0.5)
+        puts "#{contact.full_name} was successfully deleted!"
+      else
+        break
       end
-    else
-      puts "We have canceled your request to delete #{search}"
     end
   end
 
@@ -163,7 +171,6 @@ class AddressBook
     end
     print_results("\nName search results for \"#{search.capitalize}\"", results)
   end
-
   def find_by_phone_number(number)
     results = []
     search = number.gsub('-', '')
