@@ -1,5 +1,10 @@
 
 # Address Book
+
+<p align="center">
+  <img src="https://media.giphy.com/media/a1aFdVYMw1VPYYGAbN/giphy.gif" width="600" alt="Sublime's custom image"/>
+</p>
+
 Carry an entire list of addresses and phone numbers in your terminal
 * This is a CLI (Command Line Interface) Address Book application. 
 * It is a Ruby sample application demonstrating classes, blocks, variables and more.
@@ -8,9 +13,6 @@ Carry an entire list of addresses and phone numbers in your terminal
 * It provides reasonably well-written code and is a great example of object oriented programming.
 
 
-<p align="center">
-  <img src="https://media.giphy.com/media/a1aFdVYMw1VPYYGAbN/giphy.gif" width="650" alt="Sublime's custom image"/>
-</p>
 
 ## Usage
 First, clone or download the files. Once in the directory, you can type in this command prompt to start using the address book.  
