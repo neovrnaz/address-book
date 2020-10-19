@@ -8,7 +8,7 @@ Carry an entire list of addresses and phone numbers in your terminal
 * It provides reasonably well-written code and is a great example of object oriented programming.
 
 <p align="center">
-  <img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" />
+  <img src="https://gph.is/g/aXk9yVR" />
 </p>
 
 ## Usage

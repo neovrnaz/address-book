@@ -1,7 +1,7 @@
+# frozen_string_literal: true
 
 require './contact'
 require 'yaml'
-# frozen_string_literal: true
 
 # Class to initialize and store all contacts
 class AddressBook
@@ -127,6 +127,7 @@ class AddressBook
     delete = name.downcase
     contacts.each do |contact|
       next unless contact.full_name.downcase.include?(delete)
+
       puts "Delete #{contact.full_name}?"
       puts 'y: yes'
       puts 'n: no'
